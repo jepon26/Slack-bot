@@ -26,13 +26,14 @@ go build
 
 # Usage
 
-The bot supports a single command:
+## The bot supports a single command:
 
 My age is <year>
   
   
 Replace <year> with your birth year. For example, to calculate your seniority if you were born in 2000, you would use the following command:
   
+   
 My age is 2000
   
   
