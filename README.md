@@ -22,8 +22,9 @@ export SLACK_APP_TOKEN="your-app-token"
 
 # Build and run the bot:
 
-go build
-./slack-bot
+```shell
+go build ./Slack-bot
+```
 
 
 
@@ -31,7 +32,9 @@ go build
 
 ### The bot supports a single command:
 
-My age is <year>
+```shell
+My old is <year>
+
   
   
 Replace <year> with your birth year. For example, to calculate your seniority if you were born in 2000, you would use the following command:
