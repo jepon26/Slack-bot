@@ -23,9 +23,19 @@ func printCommandEvents(analyticsChannel <-chan *slacker.CommandEvent) {
 }
 
 func main() {
+<<<<<<< HEAD
 	// Set Slack bot token and app token using environment variables
 	os.Setenv("SLACK_BOT_TOKEN", "Add you bot Token")
 	os.Setenv("SLACK_APP_TOKEN", "Add your app Token")
+=======
+<<<<<<< HEAD
+	os.Setenv("SLACK_BOT_TOKEN", "")
+	os.Setenv("SLACK_APP_TOKEN", "")
+=======
+	os.Setenv("SLACK_BOT_TOKEN", "")
+	os.Setenv("SLACK_APP_TOKEN", "")
+>>>>>>> 5b1391227489dd9618224dbabb50c72a544fc81f
+>>>>>>> 2f0c109a0f10a359d2190e9ae08319d4ddbf50b5
 
 	// Create a new Slack client with the bot token and app token
 	bot := slacker.NewClient(os.Getenv("SLACK_BOT_TOKEN"), os.Getenv("SLACK_APP_TOKEN"))
