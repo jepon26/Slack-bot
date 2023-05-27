@@ -14,7 +14,7 @@ To use this bot, you'll need to create a Slack app and obtain bot and app tokens
    
    
 # Set the Slack bot token and app token as environment variables:
-
+```shell
 export SLACK_BOT_TOKEN="your-bot-token"
 export SLACK_APP_TOKEN="your-app-token"
 
