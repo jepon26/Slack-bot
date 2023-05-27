@@ -4,47 +4,56 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"logo"
 	"os"
+	"strconv"
 
 	"github.com/shomali11/slacker"
-	"golang.org/x/tools/go/analysis"
 )
 
 func printCommandEvents(analyticsChannel <-chan *slacker.CommandEvent) {
 	for event := range analyticsChannel {
-		fmt.Println("Comand Events")
-		fmt.Fprintln(event.Timestamp)
-		fmt.Fprintln(event.Comand)
-		fmt.Println(event.Paramaters)
+		fmt.Println("Command Events")
+		fmt.Println(event.Timestamp)
+		fmt.Println(event.Command)
+		fmt.Println(event.Parameters)
 		fmt.Println(event.Event)
 		fmt.Println()
 	}
 }
 
 func main() {
-	os.Setenv("SLACK_BOT_TOKEN", "xoxb-5319951951606-5326648838450-DaNeshDtnSGsDHr3tBh8MeXI")
-	os.Setenv("SLACK_APP_TOKEN", "xapp-1-A059HJAUCAZ-5323628079893-b238bc91d1a9659d6a9d2e8085b8f581d3995bb7f8db60fdcc90da30da851d89")
+	os.Setenv("SLACK_BOT_TOKEN", "xoxb-5319951951606-5326648838450-nnkFV5RK1m5g7BNWhMVq15Ay")
+	os.Setenv("SLACK_APP_TOKEN", "xapp-1-A059HJAUCAZ-5335044912292-d7cf89f0401a1c64c7843093f82ebe481bbc5af4958ebeea00fec8fbd1120ba3")
 
-	bot := slacker.NewClient(os.Getenv("SLAcK_BOT_TOCKEN"), os.Getenv("SLACK_APP_TOKEN"))
+	bot := slacker.NewClient(os.Getenv("SLACK_BOT_TOKEN"), os.Getenv("SLACK_APP_TOKEN"))
 
 	go printCommandEvents(bot.CommandEvents())
 
+	bot.Command("My old is <year>", &slacker.CommandDefinition{
+		Description: "age calculator. Example: My old is 2000",
+		Handler: func(botCtx slacker.BotContext, request slacker.Request, response slacker.ResponseWriter) {
+			year := request.Param("year")
+			old, err := strconv.Atoi(year)
+			if err != nil {
+				println("error")
+				return
+			}
+			age := 2023 - old
+			r := fmt.Sprintf("Your age is %d", age)
+			response.Reply(r)
+		},
+	})
 
-	bot.Comand("My age is <year>", &slacker.CommandDefinition){
-		Description := "age calculator",
-		Example := "My age is 1900",
-		Handler: func (botCtx slacker.botContext, request slacker.Request, response slacker.Response)  {
-			
-		}
-	}
+
 
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	err := bot.listen(ctx)
-	if err != nil{
+	err := bot.Listen(ctx)
+	if err != nil {
 		log.Fatal(err)
 	}
 }
+
+
