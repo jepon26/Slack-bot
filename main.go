@@ -11,6 +11,7 @@ import (
 )
 
 func printCommandEvents(analyticsChannel <-chan *slacker.CommandEvent) {
+	// Print command events received by the bot
 	for event := range analyticsChannel {
 		fmt.Println("Command Events")
 		fmt.Println(event.Timestamp)
@@ -22,43 +23,39 @@ func printCommandEvents(analyticsChannel <-chan *slacker.CommandEvent) {
 }
 
 func main() {
-<<<<<<< HEAD
-	os.Setenv("SLACK_BOT_TOKEN", "xoxb-5319951951606-5326648838450-nnkFV5RK1m5g7BNWhMVq15Ay")
-	os.Setenv("SLACK_APP_TOKEN", "xapp-1-A059HJAUCAZ-5335044912292-d7cf89f0401a1c64c7843093f82ebe481bbc5af4958ebeea00fec8fbd1120ba3")
-=======
-	os.Setenv("SLACK_BOT_TOKEN", "")
-	os.Setenv("SLACK_APP_TOKEN", "")
->>>>>>> 5b1391227489dd9618224dbabb50c72a544fc81f
+	// Set Slack bot token and app token using environment variables
+	os.Setenv("SLACK_BOT_TOKEN", "Add you bot Token")
+	os.Setenv("SLACK_APP_TOKEN", "Add your app Token")
 
+	// Create a new Slack client with the bot token and app token
 	bot := slacker.NewClient(os.Getenv("SLACK_BOT_TOKEN"), os.Getenv("SLACK_APP_TOKEN"))
 
+	// Print command events in a separate goroutine
 	go printCommandEvents(bot.CommandEvents())
 
-	bot.Command("My old is <year>", &slacker.CommandDefinition{
-		Description: "age calculator. Example: My old is 2000",
+	// Define a command for age calculation
+	bot.Command("My age is <year>", &slacker.CommandDefinition{
+		Description: "Age calculator. Example: My age is 2000",
 		Handler: func(botCtx slacker.BotContext, request slacker.Request, response slacker.ResponseWriter) {
 			year := request.Param("year")
-			old, err := strconv.Atoi(year)
+			age, err := strconv.Atoi(year)
 			if err != nil {
 				println("error")
 				return
 			}
-			age := 2023 - old
-			r := fmt.Sprintf("Your age is %d", age)
+			seniority := 2023 - age
+			r := fmt.Sprintf("Your seniority is %d", seniority)
 			response.Reply(r)
 		},
 	})
 
-
-
-
+	// Create a context for the bot's event loop
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
+	// Start listening for events and handle them
 	err := bot.Listen(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
-
-
