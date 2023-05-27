@@ -37,11 +37,11 @@ My old is <year>
 ```
   
   
-## Replace <strong><year><strong> with your birth year. For example, to calculate your seniority if you were born in 2000, you would use the following command:
+### Replace <strong><year><strong> with your birth year. For example, to calculate your seniority if you were born in 2000, you would use the following command:
   
-   
+```shell
 My age is 2000
-  
+```
   
   
   
