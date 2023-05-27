@@ -24,9 +24,9 @@ go build
 
 
 
-# Usage
+# Usage:
 
-## The bot supports a single command:
+### The bot supports a single command:
 
 My age is <year>
   
