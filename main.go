@@ -23,19 +23,11 @@ func printCommandEvents(analyticsChannel <-chan *slacker.CommandEvent) {
 }
 
 func main() {
-<<<<<<< HEAD
+
 	// Set Slack bot token and app token using environment variables
 	os.Setenv("SLACK_BOT_TOKEN", "Add you bot Token")
 	os.Setenv("SLACK_APP_TOKEN", "Add your app Token")
-=======
-<<<<<<< HEAD
-	os.Setenv("SLACK_BOT_TOKEN", "")
-	os.Setenv("SLACK_APP_TOKEN", "")
-=======
-	os.Setenv("SLACK_BOT_TOKEN", "")
-	os.Setenv("SLACK_APP_TOKEN", "")
->>>>>>> 5b1391227489dd9618224dbabb50c72a544fc81f
->>>>>>> 2f0c109a0f10a359d2190e9ae08319d4ddbf50b5
+
 
 	// Create a new Slack client with the bot token and app token
 	bot := slacker.NewClient(os.Getenv("SLACK_BOT_TOKEN"), os.Getenv("SLACK_APP_TOKEN"))
@@ -44,17 +36,17 @@ func main() {
 	go printCommandEvents(bot.CommandEvents())
 
 	// Define a command for age calculation
-	bot.Command("My age is <year>", &slacker.CommandDefinition{
-		Description: "Age calculator. Example: My age is 2000",
+	bot.Command("My old is <year>", &slacker.CommandDefinition{
+		Description: "old calculator. Example: My old is 2000",
 		Handler: func(botCtx slacker.BotContext, request slacker.Request, response slacker.ResponseWriter) {
 			year := request.Param("year")
-			age, err := strconv.Atoi(year)
+			old, err := strconv.Atoi(year)
 			if err != nil {
 				println("error")
 				return
 			}
-			seniority := 2023 - age
-			r := fmt.Sprintf("Your seniority is %d", seniority)
+			age := 2023 - old
+			r := fmt.Sprintf("Your age is %d", age)
 			response.Reply(r)
 		},
 	})
